@@ -1,5 +1,5 @@
-# hiya-buddy-boilerplate
-✌(-‿-)✌
+<h1>hiya-buddy-boilerplate</h1>
+✌(-‿-)✌ <(now with TypeScript!)
 
 
 <strong>Instructions</strong>
