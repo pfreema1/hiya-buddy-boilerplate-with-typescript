@@ -12,7 +12,7 @@
 
             v2.2: -mixins for easy media queries!
 
-            v3.0  -build tasks added 
+            v3.0:  -build tasks added 
                   1)create dist folder in root
                   2) add the below snippets to index.html
                   3) run "gulp build"
@@ -29,7 +29,10 @@
                   <!-- build:js /assets/scripts/app.js -->
                   <script src="./assets/scripts/app.js"></script>
                   <!-- endbuild -->
-                
+
+            v4.0: -TypeScript support added!
+                  -after adding new .ts files to app/assets/scripts, be sure
+                   to update the tsconfig.json "files" field with the new file
 *
 */
 
@@ -48,6 +51,8 @@ var usemin = require("gulp-usemin");
 var rev = require("gulp-rev");
 var cssnano = require("gulp-cssnano");
 var uglify = require("gulp-uglify");
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject("tsconfig.json");
 
 gulp.task("styles", function() {
   return gulp
@@ -62,6 +67,13 @@ gulp.task("styles", function() {
     .pipe(gulp.dest("./app/temp/styles"));
 });
 
+//task for converting typescript to javascript
+gulp.task("typescript", function() {
+  return tsProject.src()
+    .pipe(tsProject())
+    .js.pipe(gulp.dest("./app/assets/scripts"));
+});
+
 //this uses the gulp-watch plugin - *****baseDir should point to where index.html lives!!!
 gulp.task("watch", function() {
   browserSync.init({
@@ -74,7 +86,8 @@ gulp.task("watch", function() {
     browserSync.reload();
   });
 
-  watch("./app/assets/scripts/*", function() {
+  watch("./app/assets/scripts/*.ts", function() {
+    gulp.start("typescript");
     browserSync.reload();
   });
 
