@@ -2,7 +2,7 @@
 ✌(-‿-)✌
 
 
-#Instructions
+<strong>Instructions</strong>
 1) cd to where you save projects
 2) git clone *repo url.git* *folder-name*
 3) open folder in text editor
